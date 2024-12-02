@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 
+
 class Sorting{
     private:
         int *arr;
@@ -101,8 +102,39 @@ class Sorting{
         }
 
 
-        //Insertion Sort
-        //
+        // Insertion Sort Algorithm =>
+        // Best Case Time Complexity: O(n)
+        // Worst Case Time Complexity: O(n^2)
+        // Average Case Time Complexity: O(n^2)
+
+        // Insertion Sort Algorithm
+        // 1. Iterate from arr[1] to arr[n-1]
+        // 2. Compare the current element (key) to its predecessor
+        // 3. If the key element is smaller than its predecessor, compare it to the elements before.
+        //    Move the greater elements one position up to make space for the swapped element.
+
+        // Example:
+        // Initial Array: 5 2 9 1 5 6
+        // Pass 1: 2 5 9 1 5 6 (2 is inserted before 5)
+        // Pass 2: 2 5 9 1 5 6 (9 is already in the correct position)
+        // Pass 3: 1 2 5 9 5 6 (1 is inserted before 2)
+        // Pass 4: 1 2 5 5 9 6 (5 is inserted before 9)
+        // Pass 5: 1 2 5 5 6 9 (6 is inserted before 9)
+
+        void insertionSort(){
+            for(int i = 1; i<size; i++){
+                int temp = arr[i];
+                int j = i-1;
+
+                while(j>=0 && temp <= arr[j]){
+                    arr[j+1] = arr[j];
+                    j = j-1;
+                }
+                arr[j+1] = temp;
+
+            }
+
+        } 
 
          
 
@@ -119,7 +151,7 @@ int main(){
     Sorting s(5);
     s.input();
     s.traversal();
-    s.optimizedBubbleSort();
+    s.insertionSort();
     s.traversal();
     return 0;
 }
