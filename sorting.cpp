@@ -136,6 +136,128 @@ class Sorting{
 
         } 
 
+
+        //Merge Sort
+        // Based on Divide and Conquer algorithms
+        //Best, Worst and Average Case Time Complexity: O(N logN)
+        //Not an In-place Sorting Algorithm
+        //Stable Sorting Algorithm
+
+        //Merge Sort Algorithm
+        // 1. Divide the array into two halves
+        // 2. Recursively sort the two halves
+        // 3. Merge the sorted halves
+
+        // Example:
+        // Initial Array: 38 27 43 3 9 82 10
+        // Step 1: 38 27 43 3 | 9 82 10
+        // Step 2: 38 27 | 43 3 | 9 82 | 10
+        // Step 3: 27 38 | 3 43 | 9 82 | 10
+        // Step 4: 3 27 38 43 | 9 10 82
+        // Step 5: 3 9 10 27 38 43 82
+
+        void merge(int l, int m, int r){
+            int n1 = m - l + 1;
+            int n2 = r - m;
+
+            int L[n1], R[n2];
+
+            for(int i = 0; i<n1; i++){
+                L[i] = arr[l+i];
+            }
+
+            for(int j = 0; j<n2; j++){
+                R[j] = arr[m+1+j];
+            }
+
+            int i = 0;
+            int j = 0;
+            int k = l;
+
+            while(i<n1 && j<n2){
+                if(L[i] <= R[j]){
+                    arr[k] = L[i];
+                    i++;
+                }else{
+                    arr[k] = R[j];
+                    j++;
+                }
+                k++;
+            }
+
+            while(i<n1){
+                arr[k] = L[i];
+                i++;
+                k++;
+            }
+
+            while(j<n2){
+                arr[k] = R[j];
+                j++;
+                k++;
+            }
+        }
+
+        void mergeSort(int l, int r){
+            if(l<r){
+                int m = l + (r-l)/2;
+                mergeSort(l, m);
+                mergeSort(m+1, r);
+                merge(l, m, r);
+            }
+        }
+
+        //Quick Sort
+        //Based on Divide and Conquer Algorithm
+        //Best Case Time Complexity: O(n log n)
+        //Worst Case Time Complexity: O(n^2)
+        //Average Case Time Complexity: O(n log n)
+        //Not a Stable Sorting Algorithm
+        //In-place Sorting Algorithm
+
+        //Quick Sort Algorithm
+        // 1. Choose a pivot element
+        // 2. Partition the array around the pivot
+        // 3. Recursively apply the partitioning to the sub-arrays
+
+        // Example:
+        // Initial Array: 38 27 43 3 9 82 10
+        // Step 1: 38 27 43 3 9 82 10
+        // Step 2: 10 27 43 3 9 82 38
+        // Step 3: 10 27 9 3 43 82 38
+        // Step 4: 10 9 3 27 43 82 38
+        // Step 5: 3 9 10 27 43 82 38
+        // Step 6: 3 9 10 27 38 82 43
+
+
+        int partition(int low, int high){
+            int pivot = arr[high];
+            int i = low - 1;
+
+            for(int j = low; j<=high-1; j++){
+                if(arr[j] < pivot){
+                    i++;
+                    swap(arr[i], arr[j]);
+                }
+            }
+            swap(arr[i+1], arr[high]);
+            return i+1;
+        }
+
+        void quickSort(int low, int high){
+            if(low<high){
+                int pi = partition(low, high);
+                quickSort(low, pi-1);
+                quickSort(pi+1, high);
+            }
+        }
+
+
+        
+        
+
+
+
          
 
         
